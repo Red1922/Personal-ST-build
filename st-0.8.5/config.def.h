@@ -105,61 +105,61 @@ char *termname = "st-meta-256color";
  */
 unsigned int tabspaces = 4;
 
-/* Terminal colors (16 used in escape sequence) */
-//static const char *palettes[][16] = {
-//	{"black", "red3", "green3", "yellow3", "blue2", "magenta3", "cyan3", "gray90",
-//	 "gray50", "red", "green", "yellow", "#5c5cff", "magenta", "cyan", "white"},
-//	{"#223", "#900", "#080", "#fe7", "#35e", "#fc5", "#18e", "#aaa",
-//	 "#666", "#f25", "#0b0", "#ff6", "#46f", "#d6a", "#6bf", "#ddd"},
-//	{"#eaeaea", "#b7141f", "#457b24", "#fc7b08", "#134eb2", "#560088", "#0e717c", "#777777",
-//	 "#424242", "#e83b3f", "#7aba3a", "#fd8e09", "#54a4f3", "#aa4dbc", "#26bbd1", "#aaaaaa"},
-//	{"#20242d", "#b04b57", "#87b379", "#e5c179", "#7d8fa4", "#a47996", "#85a7a5", "#b3b8c3",
-//	 "#000000", "#b04b57", "#87b379", "#e5c179", "#7d8fa4", "#a47996", "#85a7a5", "#ffffff"},
-//};
-
 /* bg opacity */
-float alpha = 0.6;
+float alpha = 0.7;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-	/* solarized dark */
-	"#073642",  /*  0: black    */
-	"#dc322f",  /*  1: red      */
-	"#859900",  /*  2: green    */
-	"#b58900",  /*  3: yellow   */
-	"#268bd2",  /*  4: blue     */
-	"#d33682",  /*  5: magenta  */
-	"#2aa198",  /*  6: cyan     */
-	"#eee8d5",  /*  7: white    */
-	"#002b36",  /*  8: brblack  */
-	"#cb4b16",  /*  9: brred    */
-	"#586e75",  /* 10: brgreen  */
-	"#657b83",  /* 11: bryellow */
-	"#839496",  /* 12: brblue   */
-	"#6c71c4",  /* 13: brmagenta*/
-	"#93a1a1",  /* 14: brcyan   */
-	"#fdf6e3",  /* 15: brwhite  */
- };
- 
-/* Terminal colors for alternate (light) palette */
-static const char *altcolorname[] = {
-	/* solarized light */
-	"#eee8d5",  /*  0: black    */
-	"#dc322f",  /*  1: red      */
-	"#859900",  /*  2: green    */
-	"#b58900",  /*  3: yellow   */
-	"#268bd2",  /*  4: blue     */
-	"#d33682",  /*  5: magenta  */
-	"#2aa198",  /*  6: cyan     */
-	"#073642",  /*  7: white    */
-	"#fdf6e3",  /*  8: brblack  */
-	"#cb4b16",  /*  9: brred    */
-	"#93a1a1",  /* 10: brgreen  */
-	"#839496",  /* 11: bryellow */
-	"#657b83",  /* 12: brblue   */
-	"#6c71c4",  /* 13: brmagenta*/
-	"#586e75",  /* 14: brcyan   */
-	"#002b36",  /* 15: brwhite  */
+	/* 8 normal colors */
+	/*"black",
+	"red3",
+	"green3",
+	"yellow3",
+	"blue2",
+	"magenta3",
+	"cyan3",
+	"gray90",*/
+
+	"#282a36",
+	"#ff5b55",
+	"#59f78d",
+	"#f2f89c",
+	"#57c7ff",
+	"#ff69c1",
+	"#98edfe",
+	"#f1f1f0",
+
+	/* 8 bright colors */
+	/*"gray50",
+	"red",
+	"green",
+	"yellow",
+	"#5c5cff",
+	"magenta",
+	"cyan",
+	"white",*/
+
+	"#282a36",
+	"#ff5b55",
+	"#59f78d",
+	"#f2f89c",
+	"#57c7ff",
+	"#ff69c1",
+	"#98edfe",
+	"#f1f1f0",
+
+	[255] = 0,
+
+	/* more colors can be added after 255 to use with DefaultXX */
+	"#cccccc", /*256*/
+	"#555555", /*257*/
+	//"gray90", /* 258 - default foreground colour */
+	//"black", /* 259 - default background colour */
+	"#8ab7e8", /*258*/
+	//"#002b36", /*259*/
+	"#001517", /*259*/
+	"#00cb00", /*260*/
+	"#cb00cb", /*261*/
 };
 
 /*
@@ -167,10 +167,12 @@ static const char *altcolorname[] = {
  * foreground, background, cursor, reverse cursor
  */
 
-unsigned int defaultfg = 4;
-unsigned int defaultbg = 8;
-unsigned int defaultcs = 2;
-static unsigned int defaultrcs = 5;
+unsigned int defaultfg = 258;
+unsigned int defaultbg = 259;
+//unsigned int defaultcs = 256;
+//static unsigned int defaultrcs = 257;
+unsigned int defaultcs = 260;
+static unsigned int defaultrcs = 261;
 
 /*
  * https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h4-Functions-using-CSI-_-ordered-by-the-final-character-lparen-s-rparen:CSI-Ps-SP-q.1D81
@@ -237,8 +239,10 @@ static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
 	//{ ShiftMask,            Button4, kscrollup,      {.i = 1} },
 	//{ ShiftMask,            Button5, kscrolldown,    {.i = 1} },
-	{ ShiftMask,            Button4, kscrollup,      {.i =  mousescrollincrement} },
-	{ ShiftMask,            Button5, kscrolldown,    {.i =  mousescrollincrement} },
+	//{ ShiftMask,            Button4, kscrollup,      {.i =  mousescrollincrement} },
+	//{ ShiftMask,            Button5, kscrolldown,    {.i =  mousescrollincrement} },
+	{ XK_ANY_MOD,           Button4, kscrollup,      {.i = mousescrollincrement},		0, /* !alt */ -1 },
+	{ XK_ANY_MOD,           Button5, kscrolldown,    {.i = mousescrollincrement},		0, /* !alt */ -1 },
   { XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
@@ -264,7 +268,6 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ XK_ANY_MOD,           XK_F6,          swapcolors,     {.i =  0} },
 	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
 	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
 };
