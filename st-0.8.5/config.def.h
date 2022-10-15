@@ -60,7 +60,7 @@ static double maxlatency = 33;
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
  * attribute.
  */
-static unsigned int blinktimeout = 800;
+static unsigned int blinktimeout = 400;
 
 /*
  * thickness of underline and bar cursors
@@ -74,7 +74,7 @@ static unsigned int cursorthickness = 1;
  * 0: disable (render all U25XX glyphs normally from the font).
  */
 const int boxdraw = 1;
-const int boxdraw_bold = 0;
+const int boxdraw_bold = 1;
 
 /* braille (U28XX):  1: render as adjacent "pixels",  0: use font */
 const int boxdraw_braille = 0;
@@ -151,15 +151,14 @@ static const char *colorname[] = {
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc", /*256*/
-	"#555555", /*257*/
+	//"#cccccc", /*256*/
+	//"#555555", /*257*/
 	//"gray90", /* 258 - default foreground colour */
 	//"black", /* 259 - default background colour */
-	"#8ab7e8", /*258*/
-	//"#002b36", /*259*/
+	"#00ff00", /*256*/
+	"#ff00ff", /*257*/
+  "#8ab7e8", /*258*/
 	"#001517", /*259*/
-	"#00cb00", /*260*/
-	"#cb00cb", /*261*/
 };
 
 /*
@@ -169,10 +168,8 @@ static const char *colorname[] = {
 
 unsigned int defaultfg = 258;
 unsigned int defaultbg = 259;
-//unsigned int defaultcs = 256;
-//static unsigned int defaultrcs = 257;
-unsigned int defaultcs = 260;
-static unsigned int defaultrcs = 261;
+unsigned int defaultcs = 256;
+static unsigned int defaultrcs = 257;
 
 /*
  * https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h4-Functions-using-CSI-_-ordered-by-the-final-character-lparen-s-rparen:CSI-Ps-SP-q.1D81
