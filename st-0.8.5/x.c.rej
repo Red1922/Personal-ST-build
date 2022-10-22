@@ -1,11 +1,22 @@
 --- x.c
 +++ x.c
-@@ -1158,7 +1158,7 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
+@@ -1572,7 +1681,10 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
+ 		xclear(winx, winy + win.ch, winx + width, win.h);
  
- 	/* Change basic system colors [0-7] to bright system colors [8-15] */
- 	if ((base.mode & ATTR_BOLD_FAINT) == ATTR_BOLD && BETWEEN(base.fg, 0, 7))
--		fg = &dc.col[base.fg + 8];
-+		fg = &dc.col[base.fg];
+ 	/* Clean up the region we want to draw to. */
+-	XftDrawRect(xw.draw, bg, winx, winy, width, win.ch);
++	if (bg == &dc.col[defaultbg])
++		xclear(winx, winy, winx + width, winy + win.ch);
++	else
++		XftDrawRect(xw.draw, bg, winx, winy, width, win.ch);
  
- 	if (IS_SET(MODE_REVERSE)) {
- 		if (fg == &dc.col[defaultfg]) {
+ 	/* Set the clip region because Xft is sometimes dirty. */
+ 	r.x = 0;
+@@ -2189,6 +2309,7 @@ run:
+ 	rows = MAX(rows, 1);
+ 	tnew(cols, rows);
+ 	xinit(cols, rows);
++	bginit();
+ 	xsetenv();
+ 	selinit();
+ 	run();
