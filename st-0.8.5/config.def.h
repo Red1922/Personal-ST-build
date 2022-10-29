@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "MesloLGS NF:pixelsize=11:antialias=true:autohint=true";
+static char *font = "MesloLGS NF:pixelsize=14:antialias=true:autohint=true";
 static int borderpx =20;
 
 /*
@@ -13,8 +13,6 @@ static int borderpx =20;
  * expects farbfeld format
  * pseudo transparency fixes coordinates to the screen origin
  */
-static const char *bgfile = "/home/red/Pictures/Wallpapers/SolSphere-2.ff";
-static const int pseudotransparency = 1;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -113,6 +111,9 @@ char *termname = "st-meta-256color";
  */
 unsigned int tabspaces = 4;
 
+/* bg opacity */
+float alpha = 0.7;
+
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
@@ -163,7 +164,9 @@ static const char *colorname[] = {
 	"#00ff00", /*256*/
 	"#ff00ff", /*257*/
 	"#8ab7e8", /*258*/
-	"#001517", /*259*/
+	//"#001517", /*259 - Solarized Irradiated*/
+  "#000012", /*259 - GX Blue Irradiated*/
+
 };
 
 /*
@@ -193,24 +196,11 @@ static unsigned int cursorstyle = 3;
 static Rune stcursor = 0x2603; /* snowman ("☃") */
 
 /*
- * Whether to use pixel geometry or cell geometry
- */
-
-static Geometry geometry = CellGeometry;
-
-/*
  * Default columns and rows numbers
  */
 
 static unsigned int cols = 80;
 static unsigned int rows = 24;
-
-/*
- * Default width and height (including borders!)
- */
-
-static unsigned int width = 564;
-static unsigned int height = 364;
 
 /*
  * Default colour and shape of the mouse cursor
@@ -262,9 +252,11 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
-	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
-	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
+	//{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
+	//{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
+	{ MODKEY,               XK_minus,       zoom,           {.f = +1} },
+	{ MODKEY,               XK_equal,       zoom,           {.f = -1} },
+  { TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },

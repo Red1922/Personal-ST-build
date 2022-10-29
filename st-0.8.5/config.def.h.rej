@@ -1,12 +1,17 @@
 --- config.def.h
 +++ config.def.h
-@@ -93,9 +93,6 @@ char *termname = "st-256color";
-  */
- unsigned int tabspaces = 8;
+@@ -8,14 +8,6 @@
+ static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+ static int borderpx = 2;
  
--/* bg opacity */
--float alpha = 0.8;
+-/*
+- * background image
+- * expects farbfeld format
+- * pseudo transparency fixes coordinates to the screen origin
+- */
+-static const char *bgfile = "/path/to/image.ff";
+-static const int pseudotransparency = 0;
 -
- /* Terminal colors (16 first used in escape sequence) */
- static const char *colorname[] = {
- 	/* 8 normal colors */
+ /*
+  * What program is execed by st depends of these precedence rules:
+  * 1: program passed with -e

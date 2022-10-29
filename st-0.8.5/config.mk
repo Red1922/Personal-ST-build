@@ -10,8 +10,8 @@ MANPREFIX = $(PREFIX)/share/man
 ICONPREFIX = $(PREFIX)/share/pixmaps
 ICONNAME = st.png
 
-X11INC = /usr/X11R6/include
-X11LIB = /usr/X11R6/lib
+X11INC = /usr/include/X11
+X11LIB = /usr/lib/X11
 
 PKG_CONFIG = pkg-config
 
@@ -19,7 +19,7 @@ PKG_CONFIG = pkg-config
 INCS = -I$(X11INC) \
        `$(PKG_CONFIG) --cflags fontconfig` \
        `$(PKG_CONFIG) --cflags freetype2`
-LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft -lgd \
+LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft -lgd -lXrender\
        `$(PKG_CONFIG) --libs fontconfig` \
        `$(PKG_CONFIG) --libs freetype2`
 
