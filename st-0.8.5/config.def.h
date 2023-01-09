@@ -5,8 +5,31 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "MesloLGS NF:pixelsize=14:antialias=true:autohint=true";
-static int borderpx =20;
+
+// Classic because fuck you that's why
+//static char *font = "Liberation Mono:pixelsize=15:antialias=true:autohint=true";
+
+// Gohu
+//static char *font = "GohuFont Nerd Font:pixelsize=14:antialias=true:autohint=true"; // Good Terminalish Font
+
+// Proggy
+//static char *font = "ProggyCleanTT Nerd Font:pixelsize=14:antialias=true:autohint=true"; // Much chopping, no recommend
+
+// Hurmit
+//static char *font = "Hurmit NF:pixelsize=17:antialias=true:autohint=true"; // Best I know of, looks modern if you are not addicted to Monospace
+
+// Terminus
+//static char *font = "TerminessTTF Nerd Font:pixelsize=17:antialias=true:autohint=true"; // Best I know of, looks modern if you are not addicted to Monospace
+
+// Almost Similar
+//static char *font = "MesloLGS NF:pixelsize=14:antialias=true:autohint=true"; // Smaller NF Icons
+//static char *font = "Firacode Nerd Font:pixelsize=13:antialias=true:autohint=true"; // Okayish NF Icons
+//static char *font = "SF Mono:pixelsize=15:antialias=true:autohint=true"; // Smaller NF Icons
+
+// Makes Void Neofetch even wider.
+static char *font = "Iosevka Nerd Font:pixelsize=14:antialias=true:autohint=true";
+
+static int borderpx =0;
 
 /*
  * background image
@@ -112,12 +135,14 @@ char *termname = "st-meta-256color";
 unsigned int tabspaces = 4;
 
 /* bg opacity */
-float alpha = 0.7;
+//float alpha = 0.94;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	/*"black",
+	
+  // ## Default ##
+  /*"black",
 	"red3",
 	"green3",
 	"yellow3",
@@ -126,7 +151,9 @@ static const char *colorname[] = {
 	"cyan3",
 	"gray90",*/
 
-	"#282a36",
+  // ## Snazzy ##
+  /* 
+   "#282a36",
 	"#ff5b55",
 	"#59f78d",
 	"#f2f89c",
@@ -134,8 +161,21 @@ static const char *colorname[] = {
 	"#ff69c1",
 	"#98edfe",
 	"#f1f1f0",
+  */
+
+  // ## Catppuccin Mocha
+  "#45475a",
+	"#f38ba8",
+	"#a6e3a1",
+	"#f9e2af",
+	"#89b4fa",
+	"#f5c2e7",
+	"#94e2d5",
+	"#bac2de",
 
 	/* 8 bright colors */
+  
+  // ## Default ## 
 	/*"gray50",
 	"red",
 	"green",
@@ -145,7 +185,9 @@ static const char *colorname[] = {
 	"cyan",
 	"white",*/
 
-	"#282a36",
+  // ## Snazzy ##
+	/*
+  "#282a36",
 	"#ff5b55",
 	"#59f78d",
 	"#f2f89c",
@@ -153,20 +195,43 @@ static const char *colorname[] = {
 	"#ff69c1",
 	"#98edfe",
 	"#f1f1f0",
+  */
+
+  // ## Catppuccin Mocha ##
+  "#45475a",
+	"#f38ba8",
+	"#a6e3a1",
+	"#f9e2af",
+	"#89b4fa",
+	"#f5c2e7",
+	"#94e2d5",
+	"#bac2de",
 
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	//"#cccccc", /*256*/
+	
+  // ## Default ##
+  //"#cccccc", /*256*/
 	//"#555555", /*257*/
 	//"gray90", /* 258 - default foreground colour */
 	//"black", /* 259 - default background colour */
-	"#00ff00", /*256*/
-	"#ff00ff", /*257*/
-	"#8ab7e8", /*258*/
-	//"#001517", /*259 - Solarized Irradiated*/
-  "#000012", /*259 - GX Blue Irradiated*/
+	
+  // ## Cursor ##
+  //"#00ff00", /*256 - Cursor | Normal */
+  "#a6e3a1", /*256 - Cursor | Normal */
+	"#ff00ff", /*257 - Cursor | Inverted */
 
+  // ## Foreground ##
+	//"#8ab7e8", /*258 - fg | Solarized Irradiated*/
+	"#a0a0ff",   /*258 - fg | GX Blue Irradiated*/
+  //"#cdddf4", /*258 - fg | Catppuccin Mocha*/
+	
+  // ## Background ##
+  //"#001517", /*259 - bg | Solarized Irradiated */
+  //"#000012", /*259 - bg | GX Blue Irradiated */
+  "#1e1e2e", /*259 - bg | Catppuccin Mocha (Default)*/
+  //"#11111b",   /*259 - bg | Catppuccin Mocha (Crust) */
 };
 
 /*
@@ -192,7 +257,7 @@ static unsigned int defaultrcs = 257;
  * 7: blinking st cursor
  * 8: steady st cursor
  */
-static unsigned int cursorstyle = 3;
+static unsigned int cursorstyle = 5;
 static Rune stcursor = 0x2603; /* snowman ("☃") */
 
 /*
@@ -254,8 +319,8 @@ static Shortcut shortcuts[] = {
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
 	//{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
 	//{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
-	{ MODKEY,               XK_minus,       zoom,           {.f = +1} },
-	{ MODKEY,               XK_equal,       zoom,           {.f = -1} },
+	{ MODKEY,               XK_equal,       zoom,           {.f = +1} },
+	{ MODKEY,               XK_minus,       zoom,           {.f = -1} },
   { TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },

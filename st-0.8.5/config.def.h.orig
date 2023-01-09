@@ -5,8 +5,31 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "MesloLGS NF:pixelsize=14:antialias=true:autohint=true";
-static int borderpx =20;
+
+// Classic because fuck you that's why
+//static char *font = "Liberation Mono:pixelsize=15:antialias=true:autohint=true";
+
+// Gohu
+static char *font = "GohuFont Nerd Font:pixelsize=14:antialias=true:autohint=true"; // Good Terminalish Font
+
+// Proggy
+//static char *font = "ProggyCleanTT Nerd Font:pixelsize=14:antialias=true:autohint=true"; // Much chopping, no recommend
+
+// Hurmit
+//static char *font = "Hurmit NF:pixelsize=17:antialias=true:autohint=true"; // Best I know of, looks modern if you are not addicted to Monospace
+
+// Terminus
+//static char *font = "TerminessTTF Nerd Font:pixelsize=17:antialias=true:autohint=true"; // Best I know of, looks modern if you are not addicted to Monospace
+
+// Almost Similar
+//static char *font = "MesloLGS NF:pixelsize=14:antialias=true:autohint=true"; // Smaller NF Icons
+//static char *font = "Firacode Nerd Font:pixelsize=13:antialias=true:autohint=true"; // Okayish NF Icons
+//static char *font = "SF Mono:pixelsize=15:antialias=true:autohint=true"; // Smaller NF Icons
+
+// Makes Void Neofetch even wider.
+//static char *font = "Iosevka Nerd Font:pixelsize=15:antialias=true:autohint=true";
+
+static int borderpx =0;
 
 /*
  * background image
@@ -112,7 +135,7 @@ char *termname = "st-meta-256color";
 unsigned int tabspaces = 4;
 
 /* bg opacity */
-float alpha = 0.7;
+float alpha = 0.94;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
@@ -163,9 +186,11 @@ static const char *colorname[] = {
 	//"black", /* 259 - default background colour */
 	"#00ff00", /*256*/
 	"#ff00ff", /*257*/
-	"#8ab7e8", /*258*/
-	//"#001517", /*259 - Solarized Irradiated*/
-  "#000012", /*259 - GX Blue Irradiated*/
+	//"#8ab7e8", /*258*/
+	"#a0a0ff", /*258*/
+	//"#001517", /*259 - Solarized Irradiated */
+  //"#000012", /*259 - GX Blue Irradiated */
+  "#11111b", /*259 - Catppuccin Mocha */
 
 };
 
@@ -196,24 +221,11 @@ static unsigned int cursorstyle = 3;
 static Rune stcursor = 0x2603; /* snowman ("☃") */
 
 /*
- * Whether to use pixel geometry or cell geometry
- */
-
-static Geometry geometry = CellGeometry;
-
-/*
  * Default columns and rows numbers
  */
 
 static unsigned int cols = 80;
 static unsigned int rows = 24;
-
-/*
- * Default width and height (including borders!)
- */
-
-static unsigned int width = 564;
-static unsigned int height = 364;
 
 /*
  * Default colour and shape of the mouse cursor
@@ -267,8 +279,8 @@ static Shortcut shortcuts[] = {
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
 	//{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
 	//{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
-	{ MODKEY,               XK_minus,       zoom,           {.f = +1} },
-	{ MODKEY,               XK_equal,       zoom,           {.f = -1} },
+	{ MODKEY,               XK_equal,       zoom,           {.f = +1} },
+	{ MODKEY,               XK_minus,       zoom,           {.f = -1} },
   { TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },

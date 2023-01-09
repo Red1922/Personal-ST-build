@@ -19,13 +19,13 @@ PKG_CONFIG = pkg-config
 INCS = -I$(X11INC) \
        `$(PKG_CONFIG) --cflags fontconfig` \
        `$(PKG_CONFIG) --cflags freetype2`
-LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft -lgd -lXrender\
+LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft -lgd\
        `$(PKG_CONFIG) --libs fontconfig` \
        `$(PKG_CONFIG) --libs freetype2`
 
 # flags
 STCPPFLAGS = -DVERSION=\"$(VERSION)\" -DICON=\"$(ICONPREFIX)/$(ICONNAME)\" -D_XOPEN_SOURCE=600
-STCFLAGS = $(INCS) $(STCPPFLAGS) $(CPPFLAGS) $(CFLAGS)
+STCFLAGS = -O3 -march=native $(INCS) $(STCPPFLAGS) $(CPPFLAGS) $(CFLAGS)
 STLDFLAGS = $(LIBS) $(LDFLAGS)
 
 # OpenBSD:
